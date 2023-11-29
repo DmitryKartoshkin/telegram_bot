@@ -23,7 +23,7 @@ DICT_ICON_WEATHER = {
 }
 
 
-async def get_weather(city: str, key: str):
+async def get_weather(city: str, key=TOKEN):
 
     try:
         response = requests.get(f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={key}&units=metric")
@@ -44,12 +44,3 @@ async def get_weather(city: str, key: str):
                f"Продолжительность дня: {sunset - sunrise}"
     except:
         return "\U00002620 Проверь название города \U00002620"
-
-
-def main():
-    city = input("Введите город: ")
-    get_weather(city, key=TOKEN)
-
-
-if __name__ == "__main__":
-    main()
