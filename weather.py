@@ -3,12 +3,12 @@ from pprint import pprint
 from datetime import datetime
 
 import requests
-from dotenv import load_dotenv
-
-
-
-load_dotenv()
-TOKEN = os.getenv('TOKEN_API')
+# from dotenv import load_dotenv
+#
+#
+#
+# load_dotenv()
+# TOKEN = os.getenv('TOKEN_API')
 
 DICT_ICON_WEATHER = {
     "Clear": "Ясно \U00002680",
@@ -21,8 +21,8 @@ DICT_ICON_WEATHER = {
 }
 
 
-# async def get_weather(city: str, key=TOKEN):
-def get_weather(city: str, key: str):
+async def get_weather(city: str, key: str):
+# def get_weather(city: str, key: str):
     try:
 
         response = requests.get(f"https://api.openweathermap.org/data/2.5/weather?q={city}&lang=ru&appid={key}&units=metric")
@@ -45,5 +45,5 @@ def get_weather(city: str, key: str):
         return "\U00002620 Проверь название города \U00002620"
 
 
-if __name__ == "__main__":
-    print(get_weather("сочи", key=TOKEN))
+# if __name__ == "__main__":
+#     print(get_weather("сочи", key=TOKEN))

@@ -7,10 +7,12 @@ from aiogram.filters import Command, StateFilter
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import StatesGroup, State
 
-from main import get_weather
+from weather import get_weather
+import keyboards
 
 load_dotenv()
 BOT_TOKEN = os.getenv('BOT_TOKEN')
+TOKEN = os.getenv('TOKEN_API')
 
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
@@ -22,7 +24,7 @@ class WeatherForm(StatesGroup):
 
 @dp.message(Command("start"))
 async def cmd_start(message: types.Message):
-    await message.answer("Hello!")
+    await message.answer("Hello!", reply_markup=keyboards.main_keybord)
 
 
 @dp.message(Command("weather"))
@@ -36,8 +38,9 @@ async def form_city(message: types.Message, state: FSMContext):
     await state.update_data(city=message.text)
     data = await state.get_data()
     await state.clear()
-    s = await get_weather(data["city"])
+    s = await get_weather(data["city"], key=TOKEN)
     await message.answer(s)
+
 
 async def main():
     await bot.delete_webhook(drop_pending_updates=True)
