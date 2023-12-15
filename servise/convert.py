@@ -1,9 +1,14 @@
 from pprint import pprint
+import os
 
 import requests
+from dotenv import load_dotenv
 
+load_dotenv()
+YOUR_API_KEY = os.getenv('YOUR_API_KEY')
 
-YOUR_API_KEY = "fe403357e740d588cde6a26f"
+# YOUR_API_KEY = "fe403357e740d588cde6a26f"
+
 
 def conv():
     data = requests.get('https://www.cbr-xml-daily.ru/daily_json.js').json()

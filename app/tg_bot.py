@@ -3,11 +3,11 @@ import os
 import asyncio
 from dotenv import load_dotenv
 from aiogram import Bot, types, Dispatcher
-from aiogram.filters import Command, StateFilter
+from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import StatesGroup, State
 
-from weather import get_weather
+from servise.weather import get_weather
 import keyboards
 
 load_dotenv()
