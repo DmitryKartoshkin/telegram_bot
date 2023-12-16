@@ -9,6 +9,7 @@ import requests
 #
 # load_dotenv()
 # TOKEN = os.getenv('TOKEN_API')
+from config.config import TOKEN_API
 
 DICT_ICON_WEATHER = {
     "Clear": "Ясно \U00002680",
@@ -21,7 +22,7 @@ DICT_ICON_WEATHER = {
 }
 
 
-async def get_weather(city: str, key: str):
+async def get_weather(city: str, key=TOKEN_API):
 # def get_weather(city: str, key: str):
     try:
 

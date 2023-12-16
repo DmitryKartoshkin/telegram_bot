@@ -1,11 +1,15 @@
 from pprint import pprint
-import os
+# import os
 
 import requests
-from dotenv import load_dotenv
 
-load_dotenv()
-YOUR_API_KEY = os.getenv('YOUR_API_KEY')
+from config.config import YOUR_API_KEY
+
+
+# from dotenv import load_dotenv
+
+# load_dotenv()
+# YOUR_API_KEY = os.getenv('YOUR_API_KEY')
 
 # YOUR_API_KEY = "fe403357e740d588cde6a26f"
 
@@ -33,6 +37,7 @@ DICT_CURRENCY = {'AED': "Дирхам ОАЭ", 'ARS': "Аргентинское 
                  'VND': "Вьетнамский донг"}
 
 LIST_COUNTRY = []
+
 def conversion(currency: str):
 
     url = f'https://v6.exchangerate-api.com/v6/{YOUR_API_KEY}/latest/USD'
