@@ -1,14 +1,7 @@
-import os
 from pprint import pprint
 from datetime import datetime
 
 import requests
-# from dotenv import load_dotenv
-#
-#
-#
-# load_dotenv()
-# TOKEN = os.getenv('TOKEN_API')
 from config.config import TOKEN_API
 
 DICT_ICON_WEATHER = {
@@ -23,10 +16,10 @@ DICT_ICON_WEATHER = {
 
 
 async def get_weather(city: str, key=TOKEN_API):
-# def get_weather(city: str, key: str):
+    URL = f"https://api.openweathermap.org/data/2.5/weather?q={city}&lang=ru&appid={key}&units=metric"
     try:
 
-        response = requests.get(f"https://api.openweathermap.org/data/2.5/weather?q={city}&lang=ru&appid={key}&units=metric")
+        response = requests.get(URL)
         result = response.json()
         # pprint(result)
         weather_description = DICT_ICON_WEATHER.get(result['weather'][0]['main'],
