@@ -1,20 +1,14 @@
-import os
-
 import asyncio
-from dotenv import load_dotenv
 from aiogram import Bot, types, Dispatcher
 from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import StatesGroup, State
 
 from config.config import BOT_TOKEN
-from keyboards.keyboards import main_keybord
+from keyboards.keyboards import main_keyboard, currency_keyboard
+from servise.convert import currency_convector
 from servise.weather import get_weather
 
-
-# load_dotenv()
-# BOT_TOKEN = os.getenv('BOT_TOKEN')
-# TOKEN = os.getenv('TOKEN_API')
 
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
@@ -24,9 +18,13 @@ class WeatherForm(StatesGroup):
     city = State()
 
 
+class CurrencyForm(StatesGroup):
+    currency = State()
+
+
 @dp.message(Command("start"))
 async def cmd_start(message: types.Message):
-    await message.answer("Hello!", reply_markup=main_keybord)
+    await message.answer("Hello!", reply_markup=main_keyboard)
 
 
 @dp.message(Command("weather"))
@@ -42,6 +40,22 @@ async def form_city(message: types.Message, state: FSMContext):
     await state.clear()
     weather_forecast = await get_weather(data["city"])
     await message.answer(weather_forecast)
+
+
+@dp.message(Command("currency_convector"))
+async def cmd_weather(message: types.Message, state: FSMContext):
+    await message.answer("Выберете валюту", reply_markup=currency_keyboard().as_markup(resize_keyboard=True))
+    await state.set_state(CurrencyForm.currency)
+
+
+@dp.message(CurrencyForm.currency)
+async def currency(message: types.Message, state: FSMContext):
+    await state.update_data(currency=message.text)
+    data = await state.get_data()
+    print(data["currency"])
+    await state.clear()
+    cur = await currency_convector(data["currency"])
+    await message.answer(cur)
 
 
 async def main():
