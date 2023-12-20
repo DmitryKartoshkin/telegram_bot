@@ -1,8 +1,10 @@
 from pprint import pprint
+from datetime import datetime
 
 import requests
+import asyncio
 
-from config.config import YOUR_API_KEY
+from config.config import YOUR_API_KEY, DICT_CURRENCY_1, DICT_CURRENCY_2
 
 
 def conv():
@@ -11,17 +13,29 @@ def conv():
 # pprint(data['Valute']['USD'])
 
 
-# conv()
-
-
-def conversion(currency: str, TOKEN=YOUR_API_KEY):
+async def _conversion(currency: str, TOKEN=YOUR_API_KEY):
 
     url = f'https://v6.exchangerate-api.com/v6/{TOKEN}/latest/{currency}'
     response = requests.get(url)
     data = response.json()
-    pprint(data['conversion_rates'])
+    # pprint(data['conversion_rates'])
+    return data['conversion_rates']
 
 
-def currency_convector():
-    pass
-conversion("EUR")
+async def currency_convector(curr: str):
+    currency = DICT_CURRENCY_2.get(curr)
+    res = await _conversion(currency)
+    return f"Курс валюты на {datetime.today().strftime('%d-%m-%Y')} \n" \
+           f"1 {DICT_CURRENCY_1.get(currency)}: {res['USD']} {DICT_CURRENCY_1.get('USD')} \n" \
+           f"1 {DICT_CURRENCY_1.get(currency)}: {res['EUR']} {DICT_CURRENCY_1.get('EUR')} \n" \
+           f"1 {DICT_CURRENCY_1.get(currency)}: {res['RUB']} {DICT_CURRENCY_1.get('RUB')}"
+
+
+
+
+
+# print(asyncio.run(currency_convector("Турецкая лира")))
+# currency_convector("EUR")
+
+
+
