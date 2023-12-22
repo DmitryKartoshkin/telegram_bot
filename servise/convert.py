@@ -14,7 +14,6 @@ def conv():
 
 
 async def _conversion(currency: str, TOKEN=YOUR_API_KEY):
-
     url = f'https://v6.exchangerate-api.com/v6/{TOKEN}/latest/{currency}'
     response = requests.get(url)
     data = response.json()
@@ -22,19 +21,19 @@ async def _conversion(currency: str, TOKEN=YOUR_API_KEY):
     return data['conversion_rates']
 
 
-async def currency_convector(curr: str):
+async def currency_convector(curr: str, numb: int):
     currency = DICT_CURRENCY_2.get(curr)
     res = await _conversion(currency)
     return f"Курс валюты на {datetime.today().strftime('%d-%m-%Y')} \n" \
-           f"1 {DICT_CURRENCY_1.get(currency)}: {res['USD']} {DICT_CURRENCY_1.get('USD')} \n" \
-           f"1 {DICT_CURRENCY_1.get(currency)}: {res['EUR']} {DICT_CURRENCY_1.get('EUR')} \n" \
-           f"1 {DICT_CURRENCY_1.get(currency)}: {res['RUB']} {DICT_CURRENCY_1.get('RUB')}"
+           f"{numb} {DICT_CURRENCY_1.get(currency)}: {numb * res['USD']} {DICT_CURRENCY_1.get('USD')} \n" \
+           f"{numb} {DICT_CURRENCY_1.get(currency)}: {numb * res['EUR']} {DICT_CURRENCY_1.get('EUR')} \n" \
+           f"{numb} {DICT_CURRENCY_1.get(currency)}: {numb * res['RUB']} {DICT_CURRENCY_1.get('RUB')}"
 
 
 
 
 
-# print(asyncio.run(currency_convector("Турецкая лира")))
+print(asyncio.run(currency_convector("Турецкая лира", 4)))
 # currency_convector("EUR")
 
 
