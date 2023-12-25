@@ -33,7 +33,7 @@ async def currency_convector(curr: str, numb: int):
 
 
 
-print(asyncio.run(currency_convector("Турецкая лира", 4)))
+# print(asyncio.run(currency_convector("Турецкая лира", 4)))
 # currency_convector("EUR")
 
 

@@ -20,6 +20,7 @@ class WeatherForm(StatesGroup):
 
 class CurrencyForm(StatesGroup):
     currency = State()
+    count = State()
 
 
 @dp.message(Command("start"))
@@ -44,18 +45,39 @@ async def form_city(message: types.Message, state: FSMContext):
 
 @dp.message(Command("currency_convector"))
 async def cmd_weather(message: types.Message, state: FSMContext):
-    await message.answer("Выберете валюту", reply_markup=currency_keyboard().as_markup(resize_keyboard=True))
     await state.set_state(CurrencyForm.currency)
-
+    await message.answer("Выберете валюту", reply_markup=currency_keyboard().as_markup(resize_keyboard=True))
+    # await state.set_state(CurrencyForm.currency)
+    # await message.answer("Выберете валюту")
 
 @dp.message(CurrencyForm.currency)
 async def currency(message: types.Message, state: FSMContext):
     await state.update_data(currency=message.text)
+    await state.set_state(CurrencyForm.count)
+    await message.answer("Выберете количество для расчета")
+
+
+@dp.message(CurrencyForm.count)
+async def currency(message: types.Message, state: FSMContext):
+    await state.update_data(count=message.text)
     data = await state.get_data()
-    print(data["currency"])
+    print(data)
     await state.clear()
-    cur = await currency_convector(data["currency"])
+    cur = await currency_convector(data["currency"], int(data["count"]))
     await message.answer(cur)
+
+
+
+# @dp.message(CurrencyForm.currency)
+# async def currency(message: types.Message, state: FSMContext):
+#     await state.update_data(currency=message.text)
+#     await state.set_state(CurrencyForm.count)
+#     data = await state.get_data()
+#     print(data)
+#     await state.clear()
+#     cur = await currency_convector(data["currency"], data["count"])
+#     await message.answer(cur)
+
 
 
 async def main():
