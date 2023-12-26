@@ -21,7 +21,6 @@ async def get_weather(city: str, key=TOKEN_API):
 
         response = requests.get(URL)
         result = response.json()
-        # pprint(result)
         weather_description = DICT_ICON_WEATHER.get(result['weather'][0]['main'],
                                                     "Посмотри в окно, не пойму что там за погода")
         sunrise = datetime.fromtimestamp(result['sys']['sunrise'])
