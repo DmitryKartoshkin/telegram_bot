@@ -7,17 +7,10 @@ import asyncio
 from config.config import YOUR_API_KEY, DICT_CURRENCY_1, DICT_CURRENCY_2
 
 
-def conv():
-    data = requests.get('https://www.cbr-xml-daily.ru/daily_json.js').json()
-    pprint(data)
-# pprint(data['Valute']['USD'])
-
-
 async def _conversion(currency: str, TOKEN=YOUR_API_KEY):
     url = f'https://v6.exchangerate-api.com/v6/{TOKEN}/latest/{currency}'
     response = requests.get(url)
     data = response.json()
-    # pprint(data['conversion_rates'])
     return data['conversion_rates']
 
 
