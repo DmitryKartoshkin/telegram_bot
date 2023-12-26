@@ -47,8 +47,7 @@ async def form_city(message: types.Message, state: FSMContext):
 async def cmd_weather(message: types.Message, state: FSMContext):
     await state.set_state(CurrencyForm.currency)
     await message.answer("Выберете валюту", reply_markup=currency_keyboard().as_markup(resize_keyboard=True))
-    # await state.set_state(CurrencyForm.currency)
-    # await message.answer("Выберете валюту")
+
 
 @dp.message(CurrencyForm.currency)
 async def currency(message: types.Message, state: FSMContext):
@@ -61,7 +60,6 @@ async def currency(message: types.Message, state: FSMContext):
 async def currency(message: types.Message, state: FSMContext):
     await state.update_data(count=message.text)
     data = await state.get_data()
-    print(data)
     await state.clear()
     cur = await currency_convector(data["currency"], int(data["count"]))
     await message.answer(cur)
