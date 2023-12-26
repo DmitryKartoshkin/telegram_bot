@@ -28,17 +28,3 @@ def currency_keyboard():
         builder.add(KeyboardButton(text=str(i)))
     return builder.adjust(4)
 
-
-# def izm(dict_):
-#     dict_izm = {v: k for k, v in dict_.items()}
-#     # for k, v in dict_.items():
-#     #     print(k)
-#     #     print(v)
-#     print(dict_izm)
-#
-#
-# izm(DICT_CURRENCY)
-
-
-
-
