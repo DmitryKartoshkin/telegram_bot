@@ -66,18 +66,6 @@ async def currency(message: types.Message, state: FSMContext):
 
 
 
-# @dp.message(CurrencyForm.currency)
-# async def currency(message: types.Message, state: FSMContext):
-#     await state.update_data(currency=message.text)
-#     await state.set_state(CurrencyForm.count)
-#     data = await state.get_data()
-#     print(data)
-#     await state.clear()
-#     cur = await currency_convector(data["currency"], data["count"])
-#     await message.answer(cur)
-
-
-
 async def main():
     await bot.delete_webhook(drop_pending_updates=True)
     await dp.start_polling(bot)
