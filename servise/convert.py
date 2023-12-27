@@ -1,8 +1,6 @@
-from pprint import pprint
 from datetime import datetime
 
 import requests
-import asyncio
 
 from config.config import YOUR_API_KEY, DICT_CURRENCY_1, DICT_CURRENCY_2
 
