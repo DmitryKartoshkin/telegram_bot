@@ -1,7 +1,7 @@
 from datetime import datetime
 
 import requests
-from config.config import TOKEN_API
+from app.config.config import TOKEN_API, BAN_WORDS
 
 DICT_ICON_WEATHER = {
     "Clear": "Ясно \U00002680",
