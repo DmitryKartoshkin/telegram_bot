@@ -2,7 +2,7 @@ from datetime import datetime
 
 import requests
 
-from config.config import YOUR_API_KEY, DICT_CURRENCY_1, DICT_CURRENCY_2
+from app.config.config import YOUR_API_KEY, DICT_CURRENCY_1, DICT_CURRENCY_2
 
 
 async def _conversion(currency: str, TOKEN=YOUR_API_KEY):
