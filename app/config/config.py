@@ -9,6 +9,10 @@ BOT_TOKEN = os.getenv('BOT_TOKEN')
 TOKEN_API = os.getenv('TOKEN_API')
 YOUR_API_KEY = os.getenv('YOUR_API_KEY')
 
+WORDS = "ban_words.txt"
+WORDS_DIR = ""
+ROOT_PATH = os.path.dirname(os.path.abspath(__file__))
+FULL_PATH_WORDS = os.path.join(ROOT_PATH, WORDS_DIR, WORDS)
 
 DICT_CURRENCY_1 = {'AED': "Дирхам ОАЭ", 'ARS': "Аргентинское пе́со", 'AUD': "Австралийский доллар",
                  'AMD': "Армянский драм", 'AZN': " Азербайджанский манат", 'BGN': "Болгарский лев",
@@ -39,3 +43,6 @@ DICT_CURRENCY_2 = {'Дирхам ОАЭ': 'AED', 'Аргентинское пе�
                    'Таиландский бат': 'THB', 'Таджикский сомони': 'TJS', 'Новый туркменский манат': 'TMT',
                    'Турецкая лира': 'TRY', 'Украинская гривна': 'UAH', 'Американский доллар': 'USD',
                    'Узбекский су': 'UZS', 'Вьетнамский донг': 'VND'}
+
+BAN_WORDS = set(line.strip() for line in open(FULL_PATH_WORDS, encoding='utf-8'))
+
