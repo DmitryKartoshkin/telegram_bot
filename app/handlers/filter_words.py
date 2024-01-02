@@ -1,5 +1,4 @@
 import string
-import re
 
 from aiogram.types import Message
 from aiogram import Router, F
@@ -13,12 +12,10 @@ router = Router()
 @router.message(F.text)
 async def filter_messages(message: Message):
 
-    # string = message.text
-    # pattern = r"[а-яА-Яa-zA-Z]*"
-    # re.fullmatch(pattern, string)
     contains_ban_word = False
     if message.text:
         message_words = set(message.text.translate(str.maketrans('', '', string.punctuation)).split())
+        print(message_words)
         filtered_message = message.text
         for word in message_words:
             if word.lower() in BAN_WORDS:
