@@ -2,7 +2,7 @@ from aiogram import Router, F
 from aiogram.filters import Command
 from aiogram.types import Message, ReplyKeyboardRemove
 
-from app.keyboards.keyboards import get_start_kb
+from keyboards.keyboards import get_start_kb
 
 
 router = Router()
