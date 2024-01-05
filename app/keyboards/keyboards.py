@@ -2,7 +2,7 @@ from aiogram.types import ReplyKeyboardMarkup
 from aiogram.types import KeyboardButton
 from aiogram.utils.keyboard import ReplyKeyboardBuilder
 
-from app.config.config import DICT_CURRENCY_2
+from config.config import config
 
 
 def get_start_kb() -> ReplyKeyboardMarkup:
@@ -15,7 +15,7 @@ def get_start_kb() -> ReplyKeyboardMarkup:
 
 def currency_keyboard() -> ReplyKeyboardMarkup:
     builder = ReplyKeyboardBuilder()
-    for i in [*DICT_CURRENCY_2.keys()]:
+    for i in [*config.DICT_CURRENCY_2.keys()]:
         builder.add(KeyboardButton(text=str(i)))
     builder.adjust(4)
     return builder.as_markup(resize_keyboard=True)
