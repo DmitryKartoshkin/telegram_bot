@@ -2,12 +2,12 @@ import asyncio
 from aiogram import Bot, Dispatcher
 
 from handlers import questions, weather, filter_words
-from app.config.config import BOT_TOKEN
+from config.config import config
 
 
 # Запуск бота
 async def main():
-    bot = Bot(token=BOT_TOKEN)
+    bot = Bot(token=config.BOT_TOKEN)
     dp = Dispatcher()
 
     # Альтернативный вариант регистрации роутеров по одному на строку
