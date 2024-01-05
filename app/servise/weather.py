@@ -1,7 +1,7 @@
 from datetime import datetime
 
 import requests
-from app.config.config import TOKEN_API, BAN_WORDS
+from config.config import config
 
 DICT_ICON_WEATHER = {
     "Clear": "Ясно \U00002680",
@@ -14,7 +14,7 @@ DICT_ICON_WEATHER = {
 }
 
 
-async def get_weather(city: str, key=TOKEN_API):
+async def get_weather(city: str, key=config.TOKEN_API):
     URL = f"https://api.openweathermap.org/data/2.5/weather?q={city}&lang=ru&appid={key}&units=metric"
     try:
 
