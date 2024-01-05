@@ -4,7 +4,7 @@ from aiogram.filters import Command
 from aiogram.types import Message, ReplyKeyboardRemove
 from aiogram.fsm.context import FSMContext
 
-from app.servise.weather import get_weather
+from servise.weather import get_weather
 
 router = Router()
 
