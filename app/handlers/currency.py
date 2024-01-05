@@ -4,8 +4,8 @@ from aiogram.filters import Command
 from aiogram.types import Message, ReplyKeyboardRemove
 from aiogram.fsm.context import FSMContext
 
-from app.keyboards.keyboards import currency_keyboard
-from app.servise.convert import currency_convector
+from keyboards.keyboards import currency_keyboard
+from servise.convert import currency_convector
 
 router = Router()
 
