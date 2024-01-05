@@ -3,7 +3,7 @@ import string
 from aiogram.types import Message
 from aiogram import Router, F
 
-from app.config.config import BAN_WORDS
+from config.config import config
 
 
 router = Router()
@@ -18,7 +18,7 @@ async def filter_messages(message: Message):
         print(message_words)
         filtered_message = message.text
         for word in message_words:
-            if word.lower() in BAN_WORDS:
+            if word.lower() in config.BAN_WORDS:
                 filtered_message = filtered_message.replace(word, "*" * len(word))
                 contains_ban_word = True
 
