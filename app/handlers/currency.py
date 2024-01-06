@@ -18,7 +18,10 @@ class CurrencyForm(StatesGroup):
 @router.message(Command("currency_convector"))
 async def cmd_weather(message: Message, state: FSMContext):
     await state.set_state(CurrencyForm.currency)
-    await message.answer("Выберете валюту", reply_markup=currency_keyboard())
+    await message.answer(
+        "Выберете валюту",
+        reply_markup=currency_keyboard()
+    )
 
 
 @router.message(CurrencyForm.currency)
